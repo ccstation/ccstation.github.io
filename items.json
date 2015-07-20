@@ -37,7 +37,7 @@
             "type": "song",
             "title": "【榮耀歸於真神】",
             "titlealign": "left",
-            "content": "...",
+            "content": "1. 同來榮耀獻神，讚他成美工\n為愛人間罪人，甘犧牲兒子\n成為贖罪祭流血死亡捨身\n願相信，可進入永生的大門\n\n副歌\n頌讚主，頌讚主\n蒼生聽主聲音！\n來頌讚，來頌讚\n萬民歡呼快樂！\n同來榮耀獻神，讚他成美工\n現今一起靠藉聖子到父前\n\n2. 前來，憑藉我神愛子同歡欣\n獲啟示祂真理，他工作完臻\n一天能面見榮美主耶穌\n你改變，多奧妙，眾心必驚訝",
             "background": "vids/father.mp4"
         },
         {
@@ -152,7 +152,7 @@
         {
             "type": "text",
             "title":"認罪祈禱",
-            "titlealign": "center",
+            "titlealign": "left",
             "top":"150px",
             "content": "",
             "background": "vids/spirit.mp4"
@@ -167,7 +167,7 @@
         {
             "type": "text",
             "title":"靜默反省",
-            "titlealign": "center",
+            "titlealign": "left",
             "top":"150px",
             "content": "",
             "background": "vids/spirit.mp4"
