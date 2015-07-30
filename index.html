@@ -55,7 +55,17 @@
                         break;
                 }
             });
-                        
+          
+          
+$(document).on("swipeleft",function(){
+  changeQueue(-1);
+}); 
+      
+          
+$(documemt).on("swiperight",function(){
+  changeQueue(1);
+});
+          
             function moveUp() {
                 h = parseInt($('#content').css("height").replace(/[^-\d\.]/g, ''));
                 val = parseInt($('#content').css("marginTop").replace(/[^-\d\.]/g, ''));
