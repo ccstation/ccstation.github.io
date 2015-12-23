@@ -7,10 +7,29 @@
     <meta name="description" content="Church Worship 201509" />
     <meta name="author" content="Albert Chan" />
     <meta name="viewport" content="width=device-width">
-    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:900&text=ABCDEFGHIJKLMNOPQRSTUVWXYZ' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="css/style.css">
     <link href="bower_components/video.js/video-js.css" rel="stylesheet">
     <link rel="stylesheet" href="bower_components/BigVideo/css/bigvideo.css">
+
+    <script src="https://cdn.socket.io/socket.io-1.3.5.js"></script>
+  <style>
+
+    .main1 {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      z-index: -1;
+      -webkit-transform: translateX(-50%) translateY(-50%);
+      transform: translateX(-50%) translateY(-50%);
+      background: url(img/v10.jpg) no-repeat;
+      background-size: cover;
+    }
+
+  </style>
 </head>
 <body>
     <div class="main">
@@ -19,113 +38,183 @@
             <p id="item_content"></p>
         </div>
     </div>
-    
+
     <!-- BigVideo Dependencies -->
     <script src="bower_components/jquery/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="bower_components/jquery/jquery.min.js"><\/script>')</script>
     <script src="bower_components/jquery-ui/ui/jquery-ui.js"></script>
     <script src="bower_components/jquery-ui/ui/minified/jquery-ui.min.js"></script>
     <script src="bower_components/video.js/video.js"></script>
-    
+
     <!-- BigVideo -->
     <script src="bower_components/BigVideo/lib/bigvideo.js"></script>
     <script>
 
 	    $(function() {
-            var item_arr;
-            var item_idx=0;
-            var curr_back="";
+        var item_arr;
+        var item_idx=0;
+        var curr_back="";
+        var curr_item_contents=[];
+        var curr_item_contents_idx=0;
 
-            var BV = new $.BigVideo();
-			BV.init();
-            
-            $(document).keydown(function(event) {
-                switch (event.keyCode) {
-                    case 37: //left
-                        changeQueue(-1);
-                        break;
-                    case 38: //up
-                        moveDown();
-                        break;
-                    case 39: //right
-                        changeQueue(1);
-                        break;
-                    case 40: //right
-                        moveUp();
-                        break;
-                }
+        var BV = new $.BigVideo();
+			  BV.init();
+
+        $(document).keydown(function(event) {
+          switch (event.keyCode) {
+            case 37: //left
+              changeQueue(-1);
+              break;
+            case 38: //up
+              moveUp();
+              break;
+            case 39: //right
+              changeQueue(1);
+              break;
+            case 40: //down
+              moveDown();
+              break;
+            case 82: //r
+              reloadBackgroudn();
+              break;
+          }
+        });
+
+        function moveUp() {
+          // console.log("moveUp:" + curr_item_contents_idx + ":" + curr_item_contents.length);
+          if (curr_item_contents_idx > 0) {
+            $("#item_content").html(curr_item_contents[--curr_item_contents_idx]);
+          }
+          showTitle();
+        }
+        function moveDown() {
+          // console.log("moveDn:" + curr_item_contents_idx + ":" + curr_item_contents.length);
+          if (curr_item_contents_idx < curr_item_contents.length-1) {
+            $("#item_content").html(curr_item_contents[++curr_item_contents_idx]);
+          }
+          showTitle();
+        }
+
+        function showTitle() {
+          $("#item_title").show();
+          /**
+          if (curr_item_contents_idx==0) {
+            $("#item_title").show();
+          }
+          else {
+            $("#item_title").hide();
+          }
+          **/
+        }
+
+        function changeQueue(pos) {
+          if (((item_idx+pos) >= 0) && ((item_idx+pos) <= item_arr.length-1)) {
+            item_idx = item_idx + pos;
+            showItem(item_idx);
+          }
+        }
+
+        function reloadBackgroudn() {
+          BV.show(curr_back, {doLoop:true});
+        }
+
+        function formatContents(type, str) {
+          if (type == 'bible') {
+            var strArray = [];
+            var s1 = "";
+            str.split(/\n/).forEach(function(s) {
+              if (s=="-br-") {
+                strArray.push(s1);
+                s1="";
+              }
+              else {
+                var res = s.replace(/([0-9]+.)(.*)/g, "<span class='digit'>$1</span><span class='text'>$2</span>");
+                s1 += "<span class='bible_text'>" + res + "</span><br/>";
+              }
             });
-          
-          
-$(document).on("swipeleft",function(){
-  changeQueue(-1);
-}); 
-      
-          
-$(documemt).on("swiperight",function(){
-  changeQueue(1);
-});
-          
-            function moveUp() {
-                h = parseInt($('#content').css("height").replace(/[^-\d\.]/g, ''));
-                val = parseInt($('#content').css("marginTop").replace(/[^-\d\.]/g, ''));
-                if ( h + val > 200) { 
-                    val -= 90;
-                    $('#content').css("marginTop", val + "px");
-                }
-            }
-            function moveDown() {
-                val = parseInt($('#content').css("marginTop").replace(/[^-\d\.]/g, ''));
-                if ( val < 0) {
-                    val += 90;
-                    $('#content').css("marginTop", val + "px");
-                }
-            }
+            strArray.push(s1);
+            return strArray;
+          }
+          else {
+            return str.replace(/\n/g, "<br />").split(/-br-/);
+          }
+        }
+
+        function showItem(idx) {
+          $('#content').css("marginTop", "0px");
+          var item = item_arr[idx];
+
+          if (item.type == "blank") {
+            $("#item_title").text("");
+            $("#item_content").html("");
+            curr_back = "img/black.jpg";
+            BV.show(curr_back);
+          }
+          else {
+            curr_item_contents_idx=0;
+            curr_item_contents=formatContents(item.type, item.content);
+            $("#item_title").html(item.title);
+            $("#item_content").html(curr_item_contents[curr_item_contents_idx]);
             
-            function changeQueue(pos) {
-                if (((item_idx+pos) >= 0) && ((item_idx+pos) <= item_arr.length-1)) {
-                    item_idx = item_idx + pos;
-                    showItem(item_idx);
-                }
+            $("#item_title").removeClass();
+            $("#item_title").addClass(item.type + "_title");
+            $("#item_content").removeClass();
+            $("#item_content").addClass(item.type + "_content");
+
+            showTitle();
+
+            if (item.titleAlign != "") {
+              $("#item_title").css("text-align", item.titlealign);
             }
-            
-            function showItem(idx) {
-                $('#content').css("marginTop", "0px");
-                var item = item_arr[idx];
-                
-                if (item.type == "blank") {
-                    $("#item_title").text("");
-                    $("#item_content").html("");
-                    curr_back = "img/black.jpg";
-                    BV.show(curr_back);
-                }
-                else {
-                    $("#item_title").text(item.title);
-                    $("#item_content").html(item.content.replace(/\n/g, "<br />"));
-                
-                    if (item.titleAlign != "") {
-                        $("#item_title").css("text-align", item.titlealign);
-                    }
-                    if (item.top != "") {
-                        $('#content').css("marginTop", item.top);
-                    }
-                    if (curr_back != item.background) {
-                        curr_back = item.background;
-                        var extension = item.background.substr( (item.background.lastIndexOf('.') +1) );
-                        BV.show(curr_back,{doLoop:true});
-                    }
-                }
+            if (item.top != "") {
+              $('#content').css("marginTop", item.top);
             }
-            
-            $.getJSON( "items.json", function(data) {
-                item_arr = data.items;
-                showItem(0);
-            })          
-            
+            if (curr_back != item.background) {
+              curr_back = item.background;
+              var extension = item.background.substr( (item.background.lastIndexOf('.') +1) );
+              switch (extension) {
+                case 'mp4':
+                  BV.show(curr_back,{doLoop:true});
+                  break;
+                case 'png':
+                  BV.show(curr_back,{doLoop:true});
+                  break;
+                case 'jpg':
+                  BV.show(curr_back,{doLoop:true});
+                  break;
+              }
+            }
+
+          }
+
+          var socket = io.connect();
+          socket.on('chatMessage', function (data) {
+            console.log(data);
+            switch (data.go) {
+              case 'left':
+                changeQueue(-1);
+                break;
+              case 'up':
+                moveUp();
+                break;
+              case 'right':
+                changeQueue(1);
+                break;
+              case 'down':
+                moveDown();
+                break;
+            }
+          });
+        }
+
+        $.getJSON( "songs.json", function(data) {
+          item_arr = data;
+          showItem(0);
+        })
+
 	    });
-        
-        
+
     </script>
-    
+
 </body>
 </html>
