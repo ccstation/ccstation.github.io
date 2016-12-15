@@ -1,0 +1,66 @@
+.slides>section>p {
+  font-weight: bold;  
+}
+.slides>section>section>p {
+  font-weight: bold;  
+}
+
+.bible>section {
+  text-align: left;
+}
+.bible>section>h1 {
+  text-align: center;
+}
+.bible>section>.caption {
+  width: 20%;
+  float: left;
+  font-weight: bold;  
+}
+.bible>section>.verse {
+  width: 80%;
+  float: right;
+  font-weight: bold;  
+}
+
+#section1>section:nth-child(3) {
+  text-align: left;
+}
+#section1>section:nth-child(3)>h1 {
+  font-size: 1.5em;
+}
+#section1>section:nth-child(3)>p {
+  font-size: 1.1em;
+}
+
+#section2>section>h1 {
+  text-shadow: 2px 2px #fff;
+}
+#section2>section {
+  padding-bottom: 200px;
+}
+
+#section3>section {
+}
+
+#section3>section>h1 {
+  color: #9e0000;
+  text-shadow: 3px 3px #000;
+}
+
+#section3>section>p {
+  color: #9e0000;
+  text-shadow: 1px 2px #000;
+}
+
+#section3>section:nth-child(2)>p {
+}
+
+#section4>section>h1, #section4>section>p {
+  color: #9e0000;
+  text-shadow: 2px 2px #fff;
+}
+
+#section10>section>h1, #section10>section>p {
+  color: #9e0000;
+  text-shadow: 2px 2px #fff;
+}
