@@ -1652,7 +1652,6 @@
 					}
 					else {
 						slide.style.top = Math.max( ( ( size.height - getAbsoluteHeight( slide ) ) / 2 ) - slidePadding, 0 ) + 'px';
-						console.log("### 1 : " + slide.style.top);
 					}
 				}
 				else {
@@ -4048,25 +4047,25 @@
 				// a
 				case 65: if ( config.autoSlideStoppable ) toggleAutoSlide( autoSlideWasPaused ); break;
 				// 1
-				case 49: slide( indexh, 0 ); break;
+				case 49: event.shiftKey ? slide( indexh, 20) : slide( indexh, 0 ); break; 
 				// 2
-				case 50: slide( indexh, 1 ); break;
+				case 50: event.shiftKey ? slide( indexh, 11) : slide( indexh, 1 ); break;
 				// 3
-				case 51: slide( indexh, 2 ); break;
+				case 51: event.shiftKey ? slide( indexh, 12) : slide( indexh, 2 ); break;
 				// 4
-				case 52: slide( indexh, 3 ); break;
+				case 52: event.shiftKey ? slide( indexh, 13) : slide( indexh, 3 ); break;
 				// 5
-				case 53: slide( indexh, 4 ); break;
+				case 53: event.shiftKey ? slide( indexh, 14) : slide( indexh, 4 ); break;
 				// 6
-				case 54: slide( indexh, 5 ); break;
+				case 54: event.shiftKey ? slide( indexh, 15) : slide( indexh, 5 ); break;
 				// 7
-				case 55: slide( indexh, 6 ); break;
+				case 55: event.shiftKey ? slide( indexh, 16) : slide( indexh, 6 ); break;
 				// 8
-				case 56: slide( indexh, 7 ); break;
+				case 56: event.shiftKey ? slide( indexh, 17) : slide( indexh, 7 ); break;
 				// 9
-				case 57: slide( indexh, 8 ); break;
+				case 57: event.shiftKey ? slide( indexh, 18) : slide( indexh, 8 ); break;
 				// 0
-				case 48: slide( indexh, 9 ); break;
+				case 48: event.shiftKey ? slide( indexh, 19) : slide( indexh, 9 ); break;
 				default:
 					triggered = false;
 			}
