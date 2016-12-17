@@ -3797,12 +3797,12 @@
 		// Reverse for RTL
 		if( config.rtl ) {
 			if( ( isOverview() || nextFragment() === false ) && availableRoutes().left ) {
-				slide( indexh + 1, 0 );
+				slide( indexh + 1 );
 			}
 		}
 		// Normal navigation
 		else if( ( isOverview() || previousFragment() === false ) && availableRoutes().left ) {
-			slide( indexh - 1, 0 );
+			slide( indexh - 1 );
 		}
 
 	}
@@ -3812,12 +3812,12 @@
 		// Reverse for RTL
 		if( config.rtl ) {
 			if( ( isOverview() || previousFragment() === false ) && availableRoutes().right ) {
-				slide( indexh - 1, 0 );
+				slide( indexh - 1 );
 			}
 		}
 		// Normal navigation
 		else if( ( isOverview() || nextFragment() === false ) && availableRoutes().right ) {
-			slide( indexh + 1, 0 );
+			slide( indexh + 1 );
 		}
 
 	}
@@ -4047,26 +4047,6 @@
 				case 70: enterFullscreen(); break;
 				// a
 				case 65: if ( config.autoSlideStoppable ) toggleAutoSlide( autoSlideWasPaused ); break;
-				// 1
-				case 49: slide( indexh, 0 ); break;
-				// 2
-				case 50: slide( indexh, 1 ); break;
-				// 3
-				case 51: slide( indexh, 2 ); break;
-				// 4
-				case 52: slide( indexh, 3 ); break;
-				// 5
-				case 53: slide( indexh, 4 ); break;
-				// 6
-				case 54: slide( indexh, 5 ); break;
-				// 7
-				case 55: slide( indexh, 6 ); break;
-				// 8
-				case 56: slide( indexh, 7 ); break;
-				// 9
-				case 57: slide( indexh, 8 ); break;
-				// 0
-				case 48: slide( indexh, 9 ); break;
 				default:
 					triggered = false;
 			}

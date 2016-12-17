@@ -1,0 +1,15 @@
+#section2 {
+  color: red;
+}
+
+#section2_1 {
+  padding-bottom: 200px;
+}
+
+#section3>section {
+  padding-bottom: 200px;
+}
+
+#section3>section:nth-child(2)>p {
+  color: green;
+}

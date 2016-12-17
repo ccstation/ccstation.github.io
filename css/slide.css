@@ -5,27 +5,34 @@
   font-weight: bold;  
 }
 
-.bible>section {
+.bible>section, .bible {
   text-align: left;
 }
-.bible>section>h1 {
+.bible>section>h1, .bible>h1 {
   text-align: center;
 }
-.bible>section>.caption {
-  width: 20%;
+.bible>section>.caption, .bible>.caption {
+  width: 15%;
   float: left;
   font-weight: bold;  
 }
-.bible>section>.verse {
-  width: 80%;
+.bible>section>.verse, .bible>.verse {
+  width: 85%;
   float: right;
   font-weight: bold;  
+  padding: 0px;
+  margin: 0px;
+}
+
+.clear {
+  clear: both;
+  height: 5px;
 }
 
 #section1>section:nth-child(3) {
   text-align: left;
 }
-#section1>section:nth-child(3)>h1 {
+#section1>section:nth-child(3)>h1,  {
   font-size: 1.5em;
 }
 #section1>section:nth-child(3)>p {
@@ -44,12 +51,12 @@
 
 #section3>section>h1 {
   color: #9e0000;
-  text-shadow: 3px 3px #000;
+  text-shadow: 3px 3px #fff;
 }
 
 #section3>section>p {
   color: #9e0000;
-  text-shadow: 1px 2px #000;
+  text-shadow: 1px 2px #fff;
 }
 
 #section3>section:nth-child(2)>p {
@@ -60,7 +67,25 @@
   text-shadow: 2px 2px #fff;
 }
 
+#section5>section h2 {
+  font-size: 1.8em;
+}
+#section5>section p {
+  font-size: 1.5em;
+}
+
 #section10>section>h1, #section10>section>p {
   color: #9e0000;
   text-shadow: 2px 2px #fff;
 }
+
+#section8>section p {
+  font-size: 1.5em;
+}
+
+#section9>section p {
+  font-size: 1.4em;
+  padding: 0px;
+  margin: 0px;
+}
+
