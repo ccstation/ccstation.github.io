@@ -1,3 +1,9 @@
+video {
+    width: 1024px
+    height: 768px;
+    object-fit: cover;
+}
+
 .slides>section>p {
   font-weight: bold;  
 }
@@ -12,12 +18,12 @@
   text-align: center;
 }
 .bible>section>.caption, .bible>.caption {
-  width: 15%;
+  width: 19%;
   float: left;
   font-weight: bold;  
 }
 .bible>section>.verse, .bible>.verse {
-  width: 85%;
+  width: 81%;
   float: right;
   font-weight: bold;  
   padding: 0px;
@@ -61,17 +67,26 @@
 
 #section3>section:nth-child(2)>p {
 }
-
+#section3>section {
+  margin-top: -60px;
+}
+#section4>section {
+  margin-top: -100px;
+}
 #section4>section>h1, #section4>section>p {
   color: #9e0000;
   text-shadow: 2px 2px #fff;
 }
 
 #section5>section h2 {
-  font-size: 1.8em;
+  font-size: 2.0em;
 }
 #section5>section p {
-  font-size: 1.5em;
+  font-size: 1.8em;
+}
+
+#section7>section>h1, #section7>section>p {
+  text-shadow: 3px 3px #000;
 }
 
 #section10>section>h1, #section10>section>p {
@@ -88,8 +103,24 @@
   padding: 0px;
   margin: 0px;
 }
+#section9>section h1 {
+  text-shadow: 3px 3px #000;
+}
+#section10>section {
+  margin-top: -100px;
+}
+
+#section11>section {
+  margin-top: -100px;
+}
+#section11>section>h1, #section11>section>p {
+  text-shadow: 3px 3px #000;
+}
 
 #section15>section {
   margin-top: -100px;
+}
+#section15>section>h1, #section15>section>p {
+  text-shadow: 3px 3px #000;
 }
 
