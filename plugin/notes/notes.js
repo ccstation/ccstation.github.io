@@ -19,7 +19,9 @@ var RevealNotes = (function() {
 			notesFilePath = jsFileLocation + 'notes.html';
 		}
 
-		var notesPopup = window.open( notesFilePath, 'reveal.js - Notes', 'width=1100,height=700' );
+		var strWindowFeatures = "menubar=yes,location=yes,toolbar=yes,scrollbars=yes,resizable=yes,width=1024,height=768";
+		//var strWindowFeatures = "width=1100,height=700";
+		var notesPopup = window.open( notesFilePath, 'Preview-Notes', strWindowFeatures );
 
 		/**
 		 * Connect to the notes window through a postmessage handshake.
@@ -75,7 +77,6 @@ var RevealNotes = (function() {
 				messageData.notes = notesElement.innerHTML;
 				messageData.markdown = typeof notesElement.getAttribute( 'data-markdown' ) === 'string';
 			}
-
 			notesPopup.postMessage( JSON.stringify( messageData ), '*' );
 
 		}
@@ -94,7 +95,8 @@ var RevealNotes = (function() {
 			Reveal.addEventListener( 'overviewshown', post );
 			Reveal.addEventListener( 'paused', post );
 			Reveal.addEventListener( 'resumed', post );
-
+			Reveal.addEventListener( 'selectslide', post );
+			
 			// Post the initial state
 			post();
 

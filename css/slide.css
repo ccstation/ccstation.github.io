@@ -35,11 +35,28 @@ video {
   height: 5px;
 }
 
+#section0>section, #section0a>section, #section0b>section, #section0c>section {
+  margin-top: -100px;
+}
+#section0>section>h2 {
+  padding-top: 50px;
+  font-size: 2.8em;
+  text-shadow: 3px 3px #000;
+}
+#section1>section {
+  margin-top: -100px;
+}
+#section1>section>h2 {
+  padding-top: 50px;
+  font-size: 2.8em;
+  text-shadow: 3px 3px #000;
+}
 #section1>section:nth-child(3) {
   text-align: left;
+  margin-top: -50px;
 }
-#section1>section:nth-child(3)>h1,  {
-  font-size: 1.5em;
+#section1>section:nth-child(3)>h1  {
+  font-size: 1.8em;
 }
 #section1>section:nth-child(3)>p {
   font-size: 1.1em;
@@ -52,9 +69,6 @@ video {
   padding-bottom: 200px;
 }
 
-#section3>section {
-}
-
 #section3>section>h1 {
   color: #9e0000;
   text-shadow: 3px 3px #fff;
@@ -65,10 +79,8 @@ video {
   text-shadow: 1px 2px #fff;
 }
 
-#section3>section:nth-child(2)>p {
-}
 #section3>section {
-  margin-top: -60px;
+  margin-top: -100px;
 }
 #section4>section {
   margin-top: -100px;
@@ -84,6 +96,9 @@ video {
 #section5>section p {
   font-size: 1.8em;
 }
+#section5>section:nth-child(10) {
+  text-align: center;
+}
 
 #section7>section>h1, #section7>section>p {
   text-shadow: 3px 3px #000;
@@ -94,26 +109,60 @@ video {
   text-shadow: 2px 2px #fff;
 }
 
+#section8>section {
+  margin-top: -50px;
+}
+#section8>section:nth-child(5) {
+  margin-top: -189px;
+}
 #section8>section p {
   font-size: 1.5em;
+  text-shadow: 2px 2px #000;
+}
+
+#section9>section>.caption, .bible>.caption {
+  width: 10%;
+  padding-left: 80px;
+  float: left;
+  font-weight: bold;  
+}
+#section9>section>.verse, .bible>.verse {
+  width: 81%;
+  float: right;
+  font-weight: bold;  
+  padding: 0px;
+  margin: 0px;
 }
 
 #section9>section p {
   font-size: 1.4em;
   padding: 0px;
   margin: 0px;
+  text-shadow: 3px 3px #000;
 }
-#section9>section h1 {
+#section9>section h1, #section9>section h2 {
   text-shadow: 3px 3px #000;
 }
 #section10>section {
   margin-top: -100px;
 }
-
+#section10>section p {
+  font-size: 2.0em;
+}
 #section11>section {
   margin-top: -100px;
 }
 #section11>section>h1, #section11>section>p {
+  text-shadow: 3px 3px #000;
+}
+#section12>h1, #section12>p {
+  text-shadow: 3px 3px #000;
+}
+
+#section13>section>h1, #section13>section>p {
+  text-shadow: 3px 3px #000;
+}
+#section14>section>h1, #section14>section>p {
   text-shadow: 3px 3px #000;
 }
 

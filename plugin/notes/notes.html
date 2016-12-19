@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>reveal.js - Slide Notes</title>
+		<title>Preview - Notes</title>
 
 		<style>
 			body {
@@ -38,9 +38,9 @@
 
 			#current-slide {
 				position: absolute;
-				width: 65%;
-				height: 100%;
-				top: 0;
+				width: 100%;
+				height: 60%;
+				top: 40%;
 				left: 0;
 				padding-right: 0;
 			}
@@ -49,16 +49,16 @@
 				position: absolute;
 				width: 35%;
 				height: 40%;
-				right: 0;
+				left: 0;
 				top: 0;
 			}
 
 			#speaker-controls {
 				position: absolute;
-				top: 40%;
-				right: 0;
+				top: 0;
+				left: 40%;
 				width: 35%;
-				height: 60%;
+				height: 40%;
 				overflow: auto;
 
 				font-size: 18px;
@@ -152,18 +152,10 @@
 
 	<body>
 
-		<div id="current-slide"></div>
-		<div id="upcoming-slide"><span class="label">UPCOMING:</span></div>
+		<div id="upcoming-slide"><span class="label">STAGE:</span></div>
 		<div id="speaker-controls">
 			<div class="speaker-controls-time">
-				<h4 class="label">Time <span class="reset-button">Click to Reset</span></h4>
-				<div class="clock">
-					<span class="clock-value">0:00 AM</span>
-				</div>
-				<div class="timer">
-					<span class="hours-value">00</span><span class="minutes-value">:00</span><span class="seconds-value">:00</span>
-				</div>
-				<div class="clear"></div>
+				<div><input type="checkbox" id="interactive" name="interactive" value="check">Interactive Mode<br></div>
 			</div>
 
 			<div class="speaker-controls-notes hidden">
@@ -171,6 +163,9 @@
 				<div class="value"></div>
 			</div>
 		</div>
+		<div class="clear"></div>
+		<div id="current-slide"></div>
+		
 
 		<script src="../../plugin/markdown/marked.js"></script>
 		<script>
@@ -187,7 +182,6 @@
 				window.addEventListener( 'message', function( event ) {
 
 					var data = JSON.parse( event.data );
-
 					// The overview mode is only useful to the reveal.js instance
 					// where navigation occurs so we don't sync it
 					if( data.state ) delete data.state.overview;
@@ -207,10 +201,13 @@
 							// Send a message back to notify that the handshake is complete
 							window.opener.postMessage( JSON.stringify({ namespace: 'reveal-notes', type: 'connected'} ), '*' );
 						}
-						else if( /slidechanged|fragmentshown|fragmenthidden|paused|resumed/.test( data.eventName ) && currentState !== JSON.stringify( data.state ) ) {
-
+						else if( /slidechanged|fragmentshown|fragmenthidden/.test( data.eventName ) && currentState !== JSON.stringify( data.state ) ) {
+							if (document.getElementById("interactive").checked) {
+								window.opener.postMessage( JSON.stringify({ method: 'setState', args: [ data.state ]} ), '*' );
+							}
+						}
+						else if( /selectslide|paused|resumed/.test( data.eventName ) && currentState !== JSON.stringify( data.state ) ) {
 							window.opener.postMessage( JSON.stringify({ method: 'setState', args: [ data.state ]} ), '*' );
-
 						}
 					}
 
@@ -227,8 +224,8 @@
 
 						setupIframes( data );
 						setupKeyboard();
-						setupNotes();
-						setupTimer();
+						//setupNotes();
+						//setupTimer();
 					}
 
 				}
@@ -241,26 +238,26 @@
 					// Store the most recently set state to avoid circular loops
 					// applying the same state
 					currentState = JSON.stringify( data.state );
-
-					// No need for updating the notes in case of fragment changes
-					if ( data.notes ) {
-						notes.classList.remove( 'hidden' );
-						notesValue.style.whiteSpace = data.whitespace;
-						if( data.markdown ) {
-							notesValue.innerHTML = marked( data.notes );
-						}
-						else {
-							notesValue.innerHTML = data.notes;
-						}
-					}
-					else {
-						notes.classList.add( 'hidden' );
-					}
+					
+					// // No need for updating the notes in case of fragment changes
+					// if ( data.notes ) {
+					// 	notes.classList.remove( 'hidden' );
+					// 	notesValue.style.whiteSpace = data.whitespace;
+					// 	if( data.markdown ) {
+					// 		notesValue.innerHTML = marked( data.notes );
+					// 	}
+					// 	else {
+					// 		notesValue.innerHTML = data.notes;
+					// 	}
+					// }
+					// else {
+					// 	notes.classList.add( 'hidden' );
+					// }
 
 					// Update the note slides
 					currentSlide.contentWindow.postMessage( JSON.stringify({ method: 'setState', args: [ data.state ] }), '*' );
 					upcomingSlide.contentWindow.postMessage( JSON.stringify({ method: 'setState', args: [ data.state ] }), '*' );
-					upcomingSlide.contentWindow.postMessage( JSON.stringify({ method: 'next' }), '*' );
+					//upcomingSlide.contentWindow.postMessage( JSON.stringify({ method: 'next' }), '*' );
 
 				}
 
@@ -296,7 +293,7 @@
 
 					var urlSeparator = /\?/.test(data.url) ? '&' : '?';
 					var hash = '#/' + data.state.indexh + '/' + data.state.indexv;
-					var currentURL = data.url + urlSeparator + params + '&postMessageEvents=true' + hash;
+					var currentURL = data.url.replace("index.html", "overview.html") + urlSeparator + params + '&postMessageEvents=true' + hash;
 					var upcomingURL = data.url + urlSeparator + params + '&controls=false' + hash;
 
 					currentSlide = document.createElement( 'iframe' );

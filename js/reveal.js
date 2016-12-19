@@ -2167,7 +2167,7 @@
 		// Update the overview if it's currently active
 		if( isOverview() ) {
 			updateOverview();
-		}
+		} 
 
 		// Find the current horizontal slide and any possible vertical slides
 		// within it
@@ -3893,6 +3893,15 @@
 
 	}
 
+	function selectSlide() {
+		dispatchEvent( 'selectslide', {
+			'indexh': indexh,
+			'indexv': indexv,
+			'previousSlide': previousSlide,
+			'currentSlide': currentSlide
+		} );
+	}
+
 	/**
 	 * Checks if the target element prevents the triggering of
 	 * swipe navigation.
@@ -4039,7 +4048,8 @@
 				// space
 				case 32: isOverview() ? deactivateOverview() : event.shiftKey ? navigatePrev() : navigateNext(); break;
 				// return
-				case 13: isOverview() ? deactivateOverview() : triggered = false; break;
+				//case 13: isOverview() ? deactivateOverview() : triggered = false; break;
+				case 13: selectSlide(); break;
 				// two-spot, semicolon, b, period, Logitech presenter tools "black screen" button
 				case 58: case 59: case 66: case 190: case 191: togglePause(); break;
 				// f
