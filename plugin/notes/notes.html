@@ -44,7 +44,7 @@
 				padding-right: 0;
 				background-color: #000;
 
-				overflow: hidden;
+				overflow: scroll;
 			}
 
 			#upcoming-slide {
@@ -70,7 +70,9 @@
 				position: absolute;
 				top: 0;
 				left: 0;
-				width: 5000px;
+				padding-right: 300px;
+				padding-bottom: 200px;
+				width: 4000px;
 				height: 1000px;
 				z-index: -99;
 			}
@@ -545,8 +547,8 @@
 		}
 	}
 
-	var width = 120;
-	var height = 100;
+	var width = 150;
+	var height = 120;
 	var padding = 5;
 		
 
@@ -566,6 +568,9 @@
 		imgElem.src = imgsrc;
 		imgElem.data = seq;
 		imgElem.width = width;
+		imgElem.onclick = function() {
+			highlight(h, v);
+		};
 		box.appendChild(imgElem);
 
 		overview.appendChild(box);

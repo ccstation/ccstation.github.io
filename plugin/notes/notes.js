@@ -12,7 +12,6 @@
 var RevealNotes = (function() {
 
 	function openNotes( notesFilePath ) {
-console.log("openNotes");
 		if( !notesFilePath ) {
 			var jsFileLocation = document.querySelector('script[src$="notes.js"]').src;  // this js file path
 			jsFileLocation = jsFileLocation.replace(/notes\.js(\?.*)?$/, '');   // the js folder path
@@ -53,7 +52,6 @@ console.log("openNotes");
 		 * Posts the current slide data to the notes window
 		 */
 		function post() {
-			console.log("post ========== ");
 			var slideElement = Reveal.getCurrentSlide(),
 				notesElement = slideElement.querySelector( 'aside.notes' );
 
