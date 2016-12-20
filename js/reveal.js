@@ -1389,7 +1389,6 @@
 	 * reveal DOM element.
 	 */
 	function dispatchEvent( type, args ) {
-
 		var event = document.createEvent( 'HTMLEvents', 1, 2 );
 		event.initEvent( type, true, true );
 		extend( event, args );
