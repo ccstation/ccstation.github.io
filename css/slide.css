@@ -158,6 +158,26 @@ video {
 #section12>h1, #section12>p {
   text-shadow: 3px 3px #000;
 }
+#section12>section>.caption, .bible>.caption {
+  width: 5%;
+  float: left;
+  font-weight: bold;  
+}
+#section12>section>.verse, .bible>.verse {
+  width: 90%;
+  float: right;
+  font-weight: bold;  
+  padding: 0px;
+  margin: 0px;
+}
+#section12>section p {
+  font-size: 1.3em;
+  padding: 0px;
+  margin: 0px;
+}
+#section12>section p, #section12>section h1, #section12>section h2 {
+  text-shadow: 2px 2px #000;
+}
 
 #section13>section>h1, #section13>section>p {
   text-shadow: 3px 3px #000;
